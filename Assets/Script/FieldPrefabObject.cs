@@ -26,4 +26,10 @@ public class FieldPrefabObject {
     {
         _instance.GetComponent<Image>().color = new Color(1f, 1f, 1f);
     }
+
+    public void SetNumber(int number)
+    {
+        _instance.GetComponentInChildren<Text>().text = number.ToString();
+    }
+
 }
