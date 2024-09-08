@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,9 +16,8 @@ public class EnglishGame : MonoBehaviour
 
     public Button InformationButton;
 
-    // Dictionary to store the field prefabs using Vector2Int for grid positions
-    private Dictionary<Vector2Int, FieldPrefabObject> _englishFieldPrefabDictionary =
-        new Dictionary<Vector2Int, FieldPrefabObject>();
+    
+
 
     private FieldPrefabObject _currentHoveredFieldPrefab;
 
@@ -25,6 +25,29 @@ public class EnglishGame : MonoBehaviour
     {
         CreateFieldPrefabs();
         CreateControlPrefabs();
+        CreateSudokuObject();
+    }
+
+    private Dictionary<Tuple <int,int>, FieldPrefabObject> _englishFieldPrefabDictionary = 
+        new Dictionary<Tuple <int,int>, FieldPrefabObject>();
+
+    private void CreateSudokuObject()
+    {
+        English_SudokuObject sudokuObject = English_SudokuGenerator.CreateSudokuObject();
+        
+        for (int row = 0; row < 9; row++)
+        {
+            for (int column = 0; column < 9; column++)
+            {
+                var currentValue = sudokuObject.Values[row,column];
+                if (currentValue != 0)
+                {
+                    FieldPrefabObject fieldObject = _englishFieldPrefabDictionary[new Tuple<int, int>(row, column)];
+                    fieldObject.SetNumber(currentValue);
+                    fieldObject.IsChangeAble = false;
+                }
+            }
+        }
     }
 
     private bool IsInformationButtonActive = false;
@@ -57,7 +80,7 @@ public class EnglishGame : MonoBehaviour
 
                 // Create and store the FieldPrefabObject with a unique grid position (row, column)
                 FieldPrefabObject englishFieldPrefabObject = new FieldPrefabObject(instance, row, column);
-                _englishFieldPrefabDictionary.Add(new Vector2Int(row, column), englishFieldPrefabObject);
+                _englishFieldPrefabDictionary.Add(new Tuple<int,int>(row, column), englishFieldPrefabObject);
 
                 // Capture the current instance in the closure to avoid capturing the last instance in the loop
                 instance.GetComponent<Button>().onClick.AddListener(() => OnClick_FieldPrefab(englishFieldPrefabObject));
@@ -98,18 +121,23 @@ public class EnglishGame : MonoBehaviour
         }
     }
 
+    
     private void OnClick_FieldPrefab(FieldPrefabObject englishFieldPrefabObject)
     {
         Debug.Log($"Clicked on prefab row:{englishFieldPrefabObject.Row}, Column: {englishFieldPrefabObject.Column}");
 
-        // Unset hover mode on the previously hovered field
-        if (_currentHoveredFieldPrefab != null)
+        if(englishFieldPrefabObject.IsChangeAble)
         {
-            _currentHoveredFieldPrefab.UnSetHoverMode();
-        }
+            // Unset hover mode on the previously hovered field
+            if (_currentHoveredFieldPrefab != null)
+            {
+                _currentHoveredFieldPrefab.UnSetHoverMode();
+            }
 
-        // Set hover mode on the currently clicked field
-        _currentHoveredFieldPrefab = englishFieldPrefabObject;
-        englishFieldPrefabObject.SetHoverMode();
+            // Set hover mode on the currently clicked field
+            _currentHoveredFieldPrefab = englishFieldPrefabObject;
+            englishFieldPrefabObject.SetHoverMode();
+        }
+       
     }
 }

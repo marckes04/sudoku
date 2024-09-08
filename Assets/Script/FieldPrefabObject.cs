@@ -7,12 +7,17 @@ public class FieldPrefabObject {
     private int _column;
     private GameObject _instance;
 
+ 
+
     public FieldPrefabObject(GameObject instance, int row, int column)
     {
         _instance = instance;
         _row = row;
         _column = column;
     }
+
+    public bool IsChangeAble = true;
+
 
     public bool TryGetTextByName(string name, out Text text)
     {
