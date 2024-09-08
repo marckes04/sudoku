@@ -86,7 +86,15 @@ public class EnglishGame : MonoBehaviour
         Debug.Log($"Click on control prefab: {english_ControlPrefab.number}");
         if(_currentHoveredFieldPrefab != null)
         {
-            _currentHoveredFieldPrefab.SetNumber(english_ControlPrefab.number);
+            if(IsInformationButtonActive)
+            {
+                _currentHoveredFieldPrefab.SetSmallNumber(english_ControlPrefab.number);
+            }
+            else
+            {
+                _currentHoveredFieldPrefab.SetNumber(english_ControlPrefab.number);
+
+            }
         }
     }
 
