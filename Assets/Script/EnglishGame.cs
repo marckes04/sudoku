@@ -13,6 +13,8 @@ public class EnglishGame : MonoBehaviour
 
     public GameObject ControllPrefab;
 
+    public Button InformationButton;
+
     // Dictionary to store the field prefabs using Vector2Int for grid positions
     private Dictionary<Vector2Int, FieldPrefabObject> _englishFieldPrefabDictionary =
         new Dictionary<Vector2Int, FieldPrefabObject>();
@@ -24,6 +26,25 @@ public class EnglishGame : MonoBehaviour
         CreateFieldPrefabs();
         CreateControlPrefabs();
     }
+
+    private bool IsInformationButtonActive = false;
+
+    public void ClickOn_InformationButton()
+    {
+        Debug.Log($"Click on InformationButton");
+        if (IsInformationButtonActive)
+        { 
+            IsInformationButtonActive=false;
+            InformationButton.GetComponent<Image>().color = new Color(1f, 1f, 1f);
+        }
+        else
+        {
+            IsInformationButtonActive = true;
+            InformationButton.GetComponent<Image>().color = new Color(0.70f, 0.99f,0.99f);
+        }
+    }
+
+
 
     private void CreateFieldPrefabs()
     {
