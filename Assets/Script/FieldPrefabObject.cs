@@ -7,8 +7,6 @@ public class FieldPrefabObject {
     private int _column;
     private GameObject _instance;
 
- 
-
     public FieldPrefabObject(GameObject instance, int row, int column)
     {
         _instance = instance;
