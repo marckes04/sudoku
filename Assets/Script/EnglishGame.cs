@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EnglishGame : MonoBehaviour
@@ -18,6 +19,7 @@ public class EnglishGame : MonoBehaviour
 
     public Button InformationButton;
 
+    public Button backButton;
     
     private FieldPrefabObject _currentHoveredFieldPrefab;
 
@@ -32,6 +34,12 @@ public class EnglishGame : MonoBehaviour
         new Dictionary<Tuple <int,int>, FieldPrefabObject>();
     
     private English_SudokuObject _currentSudokuObject;
+
+
+    public void ClickOn_BackButton()
+    {
+        SceneManager.LoadScene("MainEnglish");
+    }
 
     private void CreateSudokuObject()
     {
