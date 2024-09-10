@@ -131,21 +131,24 @@ public class English_SudokuGenerator
         return amount;
     }
 
-    public static void CreateRandomGroups(English_SudokuObject english_SudokuObject) 
+    public static void CreateRandomGroups(English_SudokuObject english_SudokuObject)
     {
         List<int> values = new List<int>() { 0, 1, 2 };
-        int index  = Random.Range(0, values.Count);
+
+        int index = Random.Range(0, values.Count);
         InsertGroup(english_SudokuObject, 1 + values[index]);
-        values.RemoveAt(index);
+        values.RemoveAt(index); // List size is now 2
 
         index = Random.Range(0, values.Count);
         InsertGroup(english_SudokuObject, 4 + values[index]);
-        values.RemoveAt(index);
+        values.RemoveAt(index); // List size is now 1
 
-        InsertGroup(english_SudokuObject, 7 + values[index]);
-        values.RemoveAt(index);
-
+        // Use the remaining item
+        InsertGroup(english_SudokuObject, 7 + values[0]);
+        values.RemoveAt(0); // List is now empty
     }
+
+
 
     public static void InsertGroup(English_SudokuObject english_SudokuObject, int group)
     {
