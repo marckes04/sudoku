@@ -30,10 +30,35 @@ public class EnglishGame : MonoBehaviour
         CreateSudokuObject();
     }
 
+    public void ClickOn_Finish()
+    {
+        for (int row = 0; row < 9; row++)
+        {
+            for(int column =0; column < 9; column++)
+            {
+              FieldPrefabObject fieldObject =
+             _englishFieldPrefabDictionary[new Tuple<int, int>(row, column)];
+
+                if (fieldObject.IsChangeAble)
+                {
+                    if (_finalObject.Values[row,column] == fieldObject.Number)
+                    {
+                        fieldObject.ChangeColorToGreen();
+                    }
+                    else
+                    {
+                        fieldObject.ChangeColorToRed();
+                    }
+                }
+            }
+        }
+    }
+
     private Dictionary<Tuple <int,int>, FieldPrefabObject> _englishFieldPrefabDictionary = 
         new Dictionary<Tuple <int,int>, FieldPrefabObject>();
     
-    private English_SudokuObject _currentSudokuObject;
+    private English_SudokuObject _gameObject;
+    private English_SudokuObject _finalObject;
 
 
     public void ClickOn_BackButton()
@@ -41,15 +66,20 @@ public class EnglishGame : MonoBehaviour
         SceneManager.LoadScene("MainEnglish");
     }
 
+
     private void CreateSudokuObject()
     {
-        _currentSudokuObject = English_SudokuGenerator.CreateSudokuObject();
-        
+        English_SudokuGenerator.CreateSudokuObject(
+            out English_SudokuObject finalObject, out English_SudokuObject gameObject);
+
+
+        _gameObject = gameObject;
+        _finalObject = finalObject;
         for (int row = 0; row < 9; row++)
         {
             for (int column = 0; column < 9; column++)
             {
-                var currentValue = _currentSudokuObject.Values[row,column];
+                var currentValue = _gameObject.Values[row,column];
                 if (currentValue != 0)
                 {
                     FieldPrefabObject fieldObject = _englishFieldPrefabDictionary[new Tuple<int, int>(row, column)];
@@ -125,13 +155,8 @@ public class EnglishGame : MonoBehaviour
             }
             else
             {
-                int currentNumber = english_ControlPrefab.number;
-                int row = _currentHoveredFieldPrefab.Row;
-                int column = _currentHoveredFieldPrefab.Column;
-                if (_currentSudokuObject.IsPossibleNumberInPosition(currentNumber,row,column))
-                {
+            
                     _currentHoveredFieldPrefab.SetNumber(english_ControlPrefab.number);
-                }
             }
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,8 @@ using UnityEngine;
 
 public class English_SudokuGenerator
 {
-    public static English_SudokuObject CreateSudokuObject()
+    public static void CreateSudokuObject(
+        out English_SudokuObject finalObject, out English_SudokuObject gameObject)
     {
         _finalSodokuObject = null;
         English_SudokuObject english_sudokuObject = new English_SudokuObject();
@@ -18,8 +20,8 @@ public class English_SudokuGenerator
         {
             throw new System.Exception("Something went wrong");
         }
-
-        return RemoveSomeRandomNumbers(english_sudokuObject);
+        finalObject = english_sudokuObject;
+        gameObject = RemoveSomeRandomNumbers(english_sudokuObject);
     }
 
     private static English_SudokuObject RemoveSomeRandomNumbers(English_SudokuObject english_SudokuObject)
@@ -28,71 +30,70 @@ public class English_SudokuGenerator
         newSodokuObject.Values = (int[,])english_SudokuObject.Values.Clone();
 
         // Reinitialize values list to avoid issues on scene reset
-        List<int> values = GetValues(); // Ensure it's correctly initialized
-
+        List<Tuple<int,int>> values = GetValues(); // Ensure it's correctly initialized
+        int endValueIndex = 10;
+        if(EnglishGameSettings.EasyMiddleHard_Number == 1){endValueIndex = 71;}
+        if(EnglishGameSettings.EasyMiddleHard_Number == 2){endValueIndex = 61;}
+     
         bool isFinish = false;
 
         while (!isFinish && values.Count > 0)
         {
+            int index = UnityEngine.Random.Range(0, values.Count); // Correct random index range
             // Check the count before getting a random index
             if (values.Count > 0)
             {
-                int index = Random.Range(0, values.Count); // Correct random index range
-
+               
                 if (index >= 0 && index < values.Count)
                 {
-                    int searchedIndex = values[index]; // Safely access the value
+                    var searchedIndex = values[index]; // Safely access the value
 
                     // Proceed to look for this index in the Sudoku grid
-                    for (int i = 1; i < 10; i++)
-                    {
-                        for (int j = 0; j < 10; j++)
+
+                   
+                        if (index >= 0 && index < values.Count)
                         {
-                            if (i * j == searchedIndex)
-                            {
-                                if (index >= 0 && index < values.Count)
+                      
+                           // Remove the element safely
+
+                            English_SudokuObject nextSodokuObject = new English_SudokuObject();
+                            nextSodokuObject.Values = (int[,])newSodokuObject.Values.Clone();
+
+                          
+                                nextSodokuObject.Values[searchedIndex.Item1, searchedIndex.Item2] = 0; // Remove number
+
+                                if (TryToSolve(nextSodokuObject, true))
                                 {
-                                    values.RemoveAt(index); // Remove the element safely
-
-                                    English_SudokuObject nextSodokuObject = new English_SudokuObject();
-                                    nextSodokuObject.Values = (int[,])newSodokuObject.Values.Clone();
-
-                                    if (i - 1 >= 0 && j - 1 >= 0 && i - 1 < 9 && j - 1 < 9)
-                                    {
-                                        nextSodokuObject.Values[i - 1, j - 1] = 0; // Remove number
-
-                                        if (TryToSolve(nextSodokuObject, true))
-                                        {
-                                            newSodokuObject = nextSodokuObject; // Update object if solvable
-                                        }
-                                    }
+                                    newSodokuObject = nextSodokuObject; // Update object if solvable
                                 }
-                            }
+                           
                         }
-                    }
+                    
                 }
             }
 
             // End the loop when fewer than 30 values remain
-            if (values.Count < 30)
+            values.RemoveAt(index);
+            if (values.Count < endValueIndex)
             {
                 isFinish = true;
             }
+       
         }
 
         return newSodokuObject;
     }
 
 
-    private static List<int> GetValues()
+    private static List<Tuple<int,int>> GetValues()
     {
-        List<int> values = new List<int>();
+        List<Tuple<int,int>> values = new List<Tuple <int,int>>();
 
-        for (int i = 1; i < 10; i++)
+        for (int i = 0; i < 9; i++)
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < 9; j++)
             {
-                values.Add(i * j);
+                values.Add(new Tuple<int, int>(i,j));
             }
         }
 
@@ -213,11 +214,11 @@ public class English_SudokuGenerator
     {
         List<int> values = new List<int>() { 0, 1, 2 };
 
-        int index = Random.Range(0, values.Count);
+        int index = UnityEngine.Random.Range(0, values.Count);
         InsertGroup(english_SudokuObject, 1 + values[index]);
         values.RemoveAt(index); // List size is now 2
 
-        index = Random.Range(0, values.Count);
+        index = UnityEngine.Random.Range(0, values.Count);
         InsertGroup(english_SudokuObject, 4 + values[index]);
         values.RemoveAt(index); // List size is now 1
 
@@ -239,7 +240,7 @@ public class English_SudokuGenerator
         {
             for (int column = startColumn; column < startColumn + 3; column++)
             {
-                int index = Random.Range(0, values.Count);
+                int index = UnityEngine.Random.Range(0, values.Count);
                 english_SudokuObject.Values[row, column] = values[index];
                 values.RemoveAt(index);
             }
