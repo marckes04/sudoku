@@ -34,7 +34,8 @@ public class English_SudokuGenerator
         int endValueIndex = 10;
         if(EnglishGameSettings.EasyMiddleHard_Number == 1){endValueIndex = 71;}
         if(EnglishGameSettings.EasyMiddleHard_Number == 2){endValueIndex = 61;}
-     
+        if (EnglishGameSettings.EasyMiddleHard_Number == 3) { endValueIndex = 51;}
+
         bool isFinish = false;
 
         while (!isFinish && values.Count > 0)
