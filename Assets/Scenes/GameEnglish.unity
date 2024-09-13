@@ -383,8 +383,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -23.5, y: 3.79}
-  m_SizeDelta: {x: 490.75, y: 83.03}
+  m_AnchoredPosition: {x: 41.47, y: -9.35}
+  m_SizeDelta: {x: 620.7, y: 109.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &220108324
 MonoBehaviour:
@@ -419,7 +419,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You WIN !!!
+  m_Text: "You WIN !!! \nPress Back to Play Again"
 --- !u!222 &220108325
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -612,8 +612,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 27.77, y: -6.22}
-  m_SizeDelta: {x: 215.54, y: 42.45}
+  m_AnchoredPosition: {x: -0.00000095367, y: 9}
+  m_SizeDelta: {x: 749.32, y: 60.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &298422391
 MonoBehaviour:
@@ -648,7 +648,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: YOU LOSE!!
+  m_Text: 'YOU LOSE!! PRESS BACK TO PLAY AGAIN
+
+'
 --- !u!222 &298422392
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1797,85 +1799,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 103}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1697441421
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1697441422}
-  - component: {fileID: 1697441424}
-  - component: {fileID: 1697441423}
-  m_Layer: 5
-  m_Name: Time Game
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1697441422
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1697441421}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1806362724}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000017166, y: -310.15}
-  m_SizeDelta: {x: 487, y: 60.3}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1697441423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1697441421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 3
-    m_MaxSize: 50
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 00:00:00
---- !u!222 &1697441424
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1697441421}
-  m_CullTransparentMesh: 1
 --- !u!1 &1764851886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1993,7 +1916,6 @@ RectTransform:
   - {fileID: 283325025}
   - {fileID: 885151657}
   - {fileID: 1478912399}
-  - {fileID: 1697441422}
   - {fileID: 1929241058}
   - {fileID: 49008040}
   m_Father: {fileID: 1100973099}
